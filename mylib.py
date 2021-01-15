@@ -4,4 +4,5 @@ def welcome(name=''):
 
 
 def goodbye(name=''):
+    print("new feature")
     return f'goodbye, {name or "guest"}'
