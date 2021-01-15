@@ -1,6 +1,6 @@
 def welcome(name=''):
     print(f"user name is {name}")
-    return f'hi, {name or "guest"}'
+    return f'welcome, {name or "guest"}'
 
 
 def goodbye(name=''):
