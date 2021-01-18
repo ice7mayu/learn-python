@@ -8,6 +8,9 @@
 }
 
 """
+import logging
+
+log = logging.getLogger()
 
 
 class VendingMachine:
@@ -58,5 +61,4 @@ class Hardware:
 
     @staticmethod
     def push_item(item):
-        print('推出商品', item)
-        return item
+        log.info(f'推出商品{item}')
