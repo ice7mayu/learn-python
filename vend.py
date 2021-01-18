@@ -15,7 +15,7 @@ log = logging.getLogger()
 
 class VendingMachine:
     def __init__(self):
-        self._version = '1.0'
+        self._version = '0.1'
         self.inventory = {}
         self.hardware = Hardware()
 
@@ -47,6 +47,7 @@ class VendingMachine:
             raise Exception(f"商品 '{item}' 库存不足, 仅剩 {cur_stock} 件")
 
         self.inventory[item] = cur_stock - quality
+        log.info(f"当前库存为: {self.inventory[item]}")
         self.hardware.push_item(item)
         return None
 
