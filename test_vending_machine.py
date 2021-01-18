@@ -6,11 +6,11 @@ log = logging.getLogger()
 
 
 def data_gen():
-    total = 10
+    qty = 10
     items = (
-        ('商品1', total),
-        ('商品2', total),
-        ('商品3', total),
+        ('商品1', qty),
+        ('商品2', qty),
+        ('商品3', qty),
     )
     return items
 
@@ -23,6 +23,13 @@ def test_in_stock():
         vending_machine.stock(*item)
 
     log.info(vending_machine.view_inventory())
+    qty = 10
+
+    assert vending_machine.view_inventory() == {
+        '商品1': qty,
+        '商品2': qty,
+        '商品3': qty,
+    }
 
 
 def test_view_inventory():
@@ -49,7 +56,7 @@ def test_buy_existing_item():
     qty = 3
 
     # 调用被测试接口
-    vending_machine.buy('商品1', qty)
+    vending_machine.buy(item, qty)
     left = vending_machine.inventory.get(item)
     log.info(f"当前库存为: {vending_machine.view_inventory()}")
 
@@ -80,13 +87,20 @@ def test_out_of_stock():
     """商品库存不足时应提示错误信息, 库存不变"""
     vending_machine = VendingMachine()
     item = '商品1'
-    qty = 10
-    vending_machine.stock(item=item, quality=qty)
+    qty = 100
+    vending_machine.stock(item, qty)
 
     with pytest.raises(Exception) as ex:
-        # FIXME: 消除 magic number 11
-        vending_machine.buy(item, 11)
+        vending_machine.buy(item, qty + 1)
     ex.match('库存不足')
 
     # 校验库存应与初始值一致
     assert vending_machine.inventory.get(item) == qty
+
+
+def test_write_version():
+    vd = VendingMachine()
+
+    log.info(vd.version)
+    vd.version = '2.0'
+    log.info(vd.version)

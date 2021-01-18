@@ -12,10 +12,25 @@
 
 class VendingMachine:
     def __init__(self):
+        self._version = '1.0'
         self.inventory = {}
+        self.hardware = Hardware()
+
+    @property
+    def version(self):
+        return f"v{self._version}"
+
+    @version.setter
+    def version(self, value):
+        self._version = value
 
     def stock(self, item, quality):
-        """补充库存, 商品上架"""
+        """补充库存, 商品上架
+
+        Args:
+            item(str): 商品名称
+            quality(int): 商品数量
+        """
         self.inventory[item] = quality
 
     def buy(self, item, quality):
@@ -29,9 +44,19 @@ class VendingMachine:
             raise Exception(f"商品 '{item}' 库存不足, 仅剩 {cur_stock} 件")
 
         self.inventory[item] = cur_stock - quality
-        # TODO: 调用出货功能
+        self.hardware.push_item(item)
         return None
 
     def view_inventory(self):
         """返回当前库存"""
         return self.inventory
+
+
+class Hardware:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def push_item(item):
+        print('推出商品', item)
+        return item
