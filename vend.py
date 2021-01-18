@@ -15,7 +15,7 @@ log = logging.getLogger()
 
 class VendingMachine:
     def __init__(self):
-        self._version = '0.1'
+        self._version = ''
         self.inventory = {}
         self.hardware = Hardware()
 
