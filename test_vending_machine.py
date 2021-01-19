@@ -6,7 +6,7 @@ log = logging.getLogger()
 
 
 def data_gen():
-    qty = 10
+    qty = 100
     items = (
         ('商品1', qty),
         ('商品2', qty),
