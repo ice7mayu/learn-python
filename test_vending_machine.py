@@ -23,7 +23,7 @@ def test_in_stock():
         vending_machine.stock(*item)
 
     log.info(vending_machine.view_inventory())
-    qty = 10
+    qty = 100
 
     assert vending_machine.view_inventory() == {
         '商品1': qty,
@@ -52,7 +52,7 @@ def test_buy_existing_item():
         vending_machine.stock(*item)
 
     item = '商品1'
-    total = 10
+    total = 100
     qty = 3
 
     # 调用被测试接口
